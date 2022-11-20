@@ -1,0 +1,45 @@
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // background-color: green;
+    // height: 70vh;
+    justify-content: center;
+    height: 100%;
+    button{
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin: 20px 0;
+        transition: 0.4s;
+        &:hover{
+        background-color: wheat;
+            color: black;
+        }
+    }
+    input{
+        padding: 10px 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+        // background-color: yellow;
+        background-color: #fafafa;
+        border: 1px solid #eaeaea;
+        // border: 0.3px black solid;
+        &:focus{
+            outline: none;
+        }
+    }
+}
+
+.loginwrapper{
+    background-image: url('https://i.pinimg.com/originals/07/f7/1d/07f71dbf61e998a8789b32d658644c05.png');
+    height: 60vh;
+    // backdrop-filter: 20;
+    background-position: center;
+    background-size:cover;
+    .container{
+        height: 100%;
+    }
+}

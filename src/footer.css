@@ -1,0 +1,173 @@
+footer {
+    background-color: black;
+  }
+  
+  footer .top {
+    padding: 3% 0;
+    border-bottom: 0.5px solid;
+    border: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  
+  footer .top .list h5 {
+    letter-spacing: 1px;
+    font-size: 12px;
+    line-height: 2em;
+    opacity: 95%;
+
+    color: wheat;
+    margin-bottom: 1%;
+  }
+  
+  footer .top .list ul {
+    list-style: none;
+    padding-left: 0px;
+  }
+  .foreffect{
+    display: none;
+  }
+  footer .top .list ul li {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+  }
+  
+  footer .top .list ul li a {
+    text-decoration: none;
+    color: white;
+    opacity: 60%;
+    font-size: 12px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+  
+  footer .top .list ul li a:hover {
+    color: red;
+  }
+  
+  footer .bottom {
+    padding: 3% 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  
+  footer .bottom .copyright {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  
+  footer .bottom .copyright span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: white;
+    opacity: 30%;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+  
+  footer .bottom .copyright span a {
+    margin-left: 5px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  footer .bottom .copyright span a:hover {
+    color: red;
+  }
+  
+  footer .bottom .bankicons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  
+  footer .bottom .socialmedia {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  
+  footer .bottom .socialmedia .insta {
+    margin-right: 15px;
+  }
+  
+  footer .bottom .socialmedia a {
+    text-decoration: none;
+    color: white;
+    opacity: 30%;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+  
+  footer .bottom .socialmedia a:hover {
+    color: red;
+  }
+
+  @media screen and (max-width:767px){
+    /* .container{
+        width: 85% !important;
+    } */
+    footer .bottom {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+      }
+      footer .bottom .copyright {
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+      }
+      footer .bottom .socialmedia {
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+      }
+      footer .top {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            padding: 4% 24px;
+
+      }
+  }
+
+  @media screen and (min-width: 767px) and (max-width: 992px) {
+    footer .bottom {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+      }
+      footer .bottom .copyright {
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+      }
+      footer .bottom .socialmedia {
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+      }
+      footer .top {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+      }
+  }

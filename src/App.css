@@ -1,38 +1,502 @@
-.App {
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  /* font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif */
+}
+.foreffect{
+  display: none;
+}
+.location {
+  padding: 60px 0;
+  position: relative;
+
+}
+
+.location-header {
+  font-size: 30px;
+  color: #EBA937;
+  font-weight: 600;
+}
+
+nav {
+  background-color: black;
+  height: 85px;
+}
+
+nav img {
+  height: 85px;
+}
+
+nav .services ul li {
+  list-style: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* padding: 0px 13px; */
+}
+
+nav .services ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+  height: 100%;
+}
+nav .services ul li a {
+  color: white !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  
+  text-decoration: none;
+  transition: 0.33s;
+  transition-timing-function: ease-in-out;
+}
+
+nav .services ul li a:hover {
+  color: #f9ca24 !important;
+}
+.disabledorderbtn{
+    pointer-events: none;
+  cursor:not-allowed;
+  color:grey
+}
+.cart-total p {
+  margin: 0;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.shoparea {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  position: relative;
+}
+
+.shoparea svg {
+  font-size: 18px;
+  
+}
+
+.bag {
+  display: flex;
+  height: 85px;
+  align-items: center;
+}
+
+
+
+.basket {
+  background-color: black;
+  width: 85%;
+  height: 0px;
+  overflow: hidden;
+  transition: 0.33s;
+  transition-timing-function: ease-in-out;
+  position: absolute;
+  z-index: 1000000;
+  /* top: 85px; */
+  width: 100%;
+  top: 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.25) 1.95px 1.95px 2.6px;
+  
+}
+
+.bag:hover ~ .basket{
+  height: 250px ;
+}
+
+.basket:hover{
+  height: 250px;
+}
+
+.checkout-area{
+  display: flex;
+  margin-bottom: 10px;
+  
+  justify-content: center;
+}
+.checkanchor {
+  text-decoration: none;
+  display: inline-block;
+  width: 90%;
+  padding: 8px;
   text-align: center;
+  background-color: #d63031;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  transition: 0.3s;
+}
+.checkanchor:hover{
+ background-color: #EA2027;
+ color: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.bag p {
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 0px 3px 0px 5px;
+  border-radius: 50%;
+  background-color: #d63031;
+  margin-left: -5px;
+  transform: scale(0.9);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+sup {
+  color: white;
+  font-size: 8px;
+  padding: 5px;
+  background-color: #d63031;
+  border-radius: 50%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.items{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 180px;
+    overflow: scroll;
+}
+
+.item{
+  width: 90%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+}
+.info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+}
+
+.item-name{
+  margin:0;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+.delete-div{
+      /* width: max-content; */
+      text-align: -webkit-center;
+      display: flex;
+      /* width: 100%; */
+      /* justify-content: center; */
+      align-items: center;
+}
+.item-name:hover{
+  color: white;
+}
+.price-count span{
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.item img{
+  height: 70px;
+  object-fit: cover;
+  width: 60px;
+}
+
+.burger-button {
+  display: none;
+  justify-content: end;
+  align-items: center;
+  font-size: 25px;
+}
+.delete-div svg{
+  margin: 0;
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
+  cursor: pointer;
+}
+
+.delete-div svg:hover{
+  color: #EA2027;
+}
+
+.mobile-nav {
+  display: none;
+  background-color: black;
+  height: 0;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  flex-direction: column;
+  transition: 0.5s;
+  transition-timing-function: ease-in-out;
+  top: 0;
+}
+
+.activemobile {
+  height: 100%;
+}
+
+.our-difference {
+  padding: 50px 0;
+  background-color: #f5f7ff;
+}
+
+.difference-header {
+  font-size: 30px;
+  color: #EBA937;
+  font-weight: 600;
+  font-family: "poppins";
+}
+
+.difference-item h3 {
+  font-size: 20px;
+  color: #EBA937;
+  font-weight: 800;
+  width: 85%;
+  margin: auto;
+}
+
+.mobile-nav ul {
+  /* flex-direction: column; */
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.mobile-nav ul li {
+  list-style: none;
+  margin-top: 25px;
+}
+.mobile-nav svg {
+  margin-top: 40px;
+  color: wheat;
+  font-size: 28px;
+}
+.mobile-nav ul li a {
+  color: white ;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+.mobile-nav .navbarphonediv a{
+  color: black !important;
+}
+.carousel-indicators button{
+    height: 10px !important;
+    background-color: black  !important;
+}
+
+.carousel-indicators .active{
+  background-color: #f9ca24 !important;
+}
+
+/* .carousel-control-prev{
+  background-color:black !important ;
+} */
+
+.about-us {
+  padding: 70px 0;
+  /* margin-bottom: 50px; */
+}
+.owl-item{
+  width: 220px !important;
+  height: 200px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* margin-left: 20px; */
+}
+
+.about-us-img {
+  width: 90%;
+  padding-top: 30px;
+  height: 430px;
+  object-fit: cover;
+}
+
+.about-us-description {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-weight: 600;
+}
+
+.about-us-description h5 {
+  color: #EBA937;
+  position: relative;
+}
+
+.navbarphonediv{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navbarphone{
+
+  transition: 0.3s all ease 0s;
+  background: linear-gradient(to right, #EBA937 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+
+  /* background: yellow; */
+  padding: 10px 25px;
+  border-radius: 9px;
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+}
+.navbarphone:hover{
   color: white;
+  background-position: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.about-us-description h5::before {
+  content: "";
+  height: 2px;
+  width: 100px;
+  background-color: #EBA937;
+  position: absolute;
+  top: 12px;
+  left: 147px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.about-us-description h2 {
+  font-size: 35px;
+  color: #EBA937;
+  font-weight: 800;
+}
+
+.about-us-description p {
+  width: 80%;
+  font-size: 16px;
+}
+
+
+@media screen and (max-width: 767px) {
+
+  .owl-item{
+    width: 110px !important;
+    height: 100px !important;
   }
-  to {
-    transform: rotate(360deg);
+
+  .owl-item img{
+    width: 100px !important;
+  }
+
+  .navbarphonediv{
+    display: none;
+  }
+
+  .mobile-nav .navbarphonediv{
+    display: block;
+  }
+
+  .about-us-img{
+    height: 300px;
+    width: 100%;
+}
+
+.about-us p{
+  width: 100%;
+}
+
+.about .about-img img{
+    height: 55vh;
+}
+  .services {
+    display: none !important;
+  }
+  .shoparea {
+    display: none !important;
+  }
+
+  .burger-button {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: flex;
+  }
+  nav .logo{
+    height: 85px;
+    
+  }
+
+  .carousel {
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .carousel .carousel-item {
+    height: 300px !important; 
+    overflow: hidden;
+  }
+
+  .carousel .carousel-item img {
+    height: 300px !important ;
+    overflow: hidden;
+  }
+  nav .logo img{
+    width: 140px !important;
+    height: 60px !important;
+    object-fit: contain !important;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 992px) {
+
+  .about-us-img {
+    width: 100%;
+    height: 450px;
+    margin-bottom: 30px;
+}
+
+.about-us p {
+    width: 100%;
+}
+  .services {
+    display: none !important;
+  }
+  .shoparea {
+    display: none !important;
+  }
+
+  .burger-button {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: flex;
   }
 }
