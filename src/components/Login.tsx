@@ -7,29 +7,39 @@ import './login.scss'
 axios.defaults.withCredentials = true;
 
 export const Login = () => {
-    const [name, setName] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const [formData, setFormData] = React.useState({
+        username: '',
+        password: ''
+    })
     const [logged, setLogged] = React.useState(false)
-    
-    const nameHandler = (e) => {
-        setName(e.target.value)
+
+
+    const changeDataHandler = (e) => {
+        const name = e.target.id
+        let value = e.target.value 
+        setFormData((prevstate)=>{
+            return{
+                ...prevstate,
+                [name]:value
+            }
+        })
+
+        console.log(formData)
     }
-    const passHandler = (e) => {
-        setPassword(e.target.value)
-    }
+
     const submitHandler = (e) => {
         e.preventDefault();
-        const user = {
-            username: name,
-            password: password
-        }
-        axios.post('http://localhost:3000/login', user)
+        // const user = {
+        //     username: name,
+        //     password: password
+        // }
+        axios.post('http://localhost:3000/login', formData)
             .then((res) => {
                 console.log(res)
                 document.querySelector('.logout')?.classList.remove('foreffect')
                 document.querySelector('.login')?.classList.add('foreffect')
                 // local setting
-                localStorage.setItem('user', user.username)
+                localStorage.setItem('user', formData.username)
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -87,52 +97,52 @@ export const Login = () => {
 
 
 
-   
+
 
     return (
         <div>
-        {(() => {
-          if (logged) {
-            return (
-                <div></div>
-            )
-          }
-          else {
-            return (
-            <div className="loginwrapper">
-                <div className="container">
-                    <form className="col-lg-12 col-12 col-md-12" onSubmit={submitHandler} method="post">
-                        <input className="col-lg-6  col-12 col-md-6" onChange={(e) => nameHandler(e)} type="text" placeholder="Username" />
-                        <input className="col-lg-6  col-12 col-md-6" onChange={(e) => passHandler(e)} type="password" placeholder="Password" />
-                        <button className="col-lg-6  col-12 col-md-6" type="submit">Daxil ol.</button>
-                        <div className="col-lg-6 col-12 col-md-6 d-flex" style={{justifyContent:'space-between'}}>
-                        <span style={{color:'black'}}>Hesabınız yoxdur?  </span> 
-                        <Link style={{color:"black"}} to='/register'>Qeydiyyatdan kec</Link>
+            {(() => {
+                if (logged) {
+                    return (
+                        <div></div>
+                    )
+                }
+                else {
+                    return (
+                        <div className="loginwrapper">
+                            <div className="container">
+                                <form className="col-lg-12 col-12 col-md-12" onSubmit={submitHandler} onChange={changeDataHandler} method="post">
+                                    <input className="col-lg-6  col-12 col-md-6" type="text" id="username" placeholder="Username" />
+                                    <input className="col-lg-6  col-12 col-md-6" type="password" id="password" placeholder="Password" />
+                                    <button className="col-lg-6  col-12 col-md-6" type="submit">Daxil ol.</button>
+                                    <div className="col-lg-6 col-12 col-md-6 d-flex" style={{ justifyContent: 'space-between' }}>
+                                        <span style={{ color: 'black' }}>Hesabınız yoxdur?  </span>
+                                        <Link style={{ color: "black" }} to='/register'>Qeydiyyatdan kec</Link>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-            )
-            
-          }
-        })()}
-      </div>
+                    )
+
+                }
+            })()}
+        </div>
     )
-        
-          
-      
-    }
-        
-        
-      
-       
-    
-   
-        
-            
-           
-        
-      
-    
-       
-    
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

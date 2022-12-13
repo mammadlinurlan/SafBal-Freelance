@@ -98,10 +98,6 @@ export const Phone = (props) => {
        
       }
 
-     
-  
-
-
       useEffect(()=>{
 
         axios.get(`http://localhost:3000/spec/${props.brand}`)
@@ -137,12 +133,12 @@ export const Phone = (props) => {
                     <p>
                         Qiymət : {props.price} azn
                     </p>
-                    {/* <h5>
+                    <h5>
                         <Link to={newTo}>Update</Link>
                     </h5>
                     <h5 >
                         <Link className="fordelete" onClick={deleteHandler} style={{ color: "red" }} to={deleteTo}>Delete</Link>
-                    </h5> */}
+                    </h5>
                     <h5>
                         
                         <Link to={'google.com'}  onClick={addToHandler} className='addtocardnow' style={{color:'white',textDecoration:'none',background:'green',padding:'10px 20px',borderRadius:'15px'}}><FontAwesomeIcon  icon={faShoppingBag} />  Səbətə əlavə et</Link>

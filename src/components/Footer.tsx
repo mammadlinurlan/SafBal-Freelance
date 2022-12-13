@@ -16,7 +16,6 @@ export const Footer = () => {
                 document.querySelector('.login')?.classList.remove('foreffect')
                 document.querySelector('.register')?.classList.remove('foreffect')
                 localStorage.removeItem('user')
-                
                 basketContext.basketSetter([])
                 context.userSetter('')
 

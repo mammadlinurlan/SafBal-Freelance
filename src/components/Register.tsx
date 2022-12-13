@@ -1,52 +1,47 @@
 import React, { useEffect } from "react";
 import "./register.scss";
 import Swal from 'sweetalert2'
-import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 export const Register = () => {
-    const [name, setName] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [confirm, setConfirm] = React.useState('');
-    const [email, setEmail] = React.useState('');
+    const [formData,setFormData] = React.useState({
+        username :'' ,
+        password :'' ,
+        confirmpassword : '' ,
+        isadmin : false ,
+        email : '' ,
+    })
 
-    const nameHandler = (e) => {
-        setName(e.target.value)
-    }
-    const passwordHandler = (e) => {
-        setPassword(e.target.value)
-    }
-    const confirmHandler = (e) => {
-        setConfirm(e.target.value)
-    }
-    const mailHandler = (e) => {
-        setEmail(e.target.value)
+    const changeDataHandler = (e) => {
+        const name = e.target.id;
+        let value = e.target.value;
+        setFormData((prevstate)=>{
+            return{
+                ...prevstate,
+                [name]:value
+            }
+        })
+        console.log(formData)
     }
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (password != confirm) {
+        if (formData.password != formData.confirmpassword) {
             alert('passwords must be same!');
             return;
         }
         var hasNumber = /\d/;
-        if (!hasNumber.test(password) || !hasNumber.test(confirm)) {
+        if (!hasNumber.test(formData.password) || !hasNumber.test(formData.confirmpassword)) {
             alert('password must include a number');
             return;
         }
-        if (name.length > 30) {
+        if (formData.username.length > 30) {
             alert('username max length is 30')
             return;
         }
-        const user = {
-            username: name,
-            password: password,
-            confirmpassword: confirm,
-            isadmin: false,
-            email: email
-        }
-        axios.post('http://localhost:3000/postuser', user).then((result) => {
+
+        axios.post('http://localhost:3000/postuser', formData).then((result) => {
             console.log(result.status)
             if (result.status === 200) {
                 Swal.fire({
@@ -57,7 +52,7 @@ export const Register = () => {
                     timer: 1500
                 })
                 setTimeout(() => {
-                    window.location.href = `http://${window.location.host}`
+                    window.location.href = `http://${window.location.host}/login`
 
                 }, 1500);
 
@@ -93,12 +88,12 @@ export const Register = () => {
             <div className="forback">
                 <div className="container">
                     <div className="registerdiv">
-                        <form onSubmit={submitHandler} className='regform' method="post">
+                        <form onSubmit={submitHandler} onChange={changeDataHandler}  className='regform' method="post">
                             <h2>HESAB YARAT</h2>
-                            <input onChange={(e) => nameHandler(e)} type='text' className="input-group" placeholder="Username" maxLength={30} required />
-                            <input onChange={(e) => passwordHandler(e)} type='password' placeholder="Password" required />
-                            <input onChange={(e) => confirmHandler(e)} type='password' placeholder="Confirm Password" required />
-                            <input onChange={(e) => mailHandler(e)} type='email' placeholder="Email" required />
+                            <input id="username" type='text' className="input-group" placeholder="Username" maxLength={30} required />
+                            <input id="password" type='password' placeholder="Password" required />
+                            <input id="confirmpassword" type='password' placeholder="Confirm Password" required />
+                            <input id="email" type='email' placeholder="Email" required />
                             <button type="submit">QEYDİYYATDAN KEÇ</button>
                             <div className="col-lg-6 col-12 col-md-6 d-flex" style={{justifyContent:'space-between',width:"70%"}}>
                         <span style={{color:'black'}}>Hesabınız var?  </span> 
