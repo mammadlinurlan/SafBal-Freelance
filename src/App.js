@@ -28,6 +28,22 @@ function App() {
   const userSetter = (value) => {
     setUser(value)
   }
+  window.scroll(function(){
+    var yPos = window.scrollY
+    console.log('sa')
+  })
+  onscroll = () => {
+    if(window.scrollY > 600)
+    {
+      document.querySelector('.stickyNav').classList.add('stickyheight')
+    }
+    else{
+      document.querySelector('.stickyNav').classList.remove('stickyheight')
+      
+    }
+
+
+  }
   useEffect(() => {
     axios.get(`http://localhost:3000/getbasket/${localStorage.getItem('user')}`)
       .then(({ data }) => {

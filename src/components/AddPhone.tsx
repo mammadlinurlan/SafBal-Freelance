@@ -3,63 +3,36 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export const AddPhone = () => {
-    const [brand, setBrand] = React.useState(0)
-    const [model, setModel] = React.useState('')
-    const [img, setImg] = React.useState('')
-    const [color, setColor] = React.useState('')
-    const [ram, setRam] = React.useState('')
-    const [price, setPrice] = React.useState('')
-    const [memory, setMemory] = React.useState('')
-    const [brands, setBrands] = React.useState([])
+    const [data, setData] = React.useState({
+        name: '',
+        stock: '',
+        price: '',
+        image: ''
+    })
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/brands')
-            .then((result) => {
-                // console.log(result.data)
-                setBrands(result.data)
-                console.log(brands)
-            })
+    const changeHandler = (e) => {
+        const name = e.target.id
+        let value = name == 'image' ? e.target.files[0] : e.target.value
+        if (name == 'stock' || name == 'price') {
+            value = Number(value)
+        }
+        setData((prevstate) => {
+            return {
+                ...prevstate,
+                [name]: value
+            }
+        })
+    }
 
-    }, [])
-    const brandHandler = (e) => {
-        setBrand(e.target.value)
-    }
-    const modelHandler = (e) => {
-        setModel(e.target.value)
-    }
-    const imgHandler = (e) => {
-        setImg(e.target.value)
-    }
-    const colorHandler = (e) => {
-        setColor(e.target.value)
-    }
-    const ramHandler = (e) => {
-        setRam(e.target.value)
-    }
-    const priceHandler = (e) => {
-        setPrice(e.target.value)
-    }
-    const memoryHandler = (e) => {
-        setMemory(e.target.value)
-    }
     const submitHandler = (e) => {
-        e.preventDefault()
-        const phone = {
-            brand: brand,
-            model: model,
-            ram: Number(ram),
-            img: img,
-            price: Number(price),
-            color: color,
-            memory: Number(memory)
-        }
-
-        if (Number(phone.brand) == 0) {
-            alert('select a brand')
-        }
-        else {
-
-            axios.post('http://localhost:3000/postphone', phone).then(res => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('image', data.image)
+        formData.append('price', data.price)
+        formData.append('stock', data.stock)
+        formData.append('name', data.name)
+        axios.post('http://localhost:3000/addproduct', formData)
+            .then((res) => {
                 console.log(res)
                 Swal.fire({
                     position: 'center',
@@ -73,19 +46,21 @@ export const AddPhone = () => {
 
                 }, 1500);
             })
-                .catch(err => {
-                    console.log(err)
+            .catch((err) => {
+                console.log(err)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error...',
+                    text: 'Fill the inputs correctly!'
                 })
-
-        }
-
-
-        console.log(phone)
+            })
+        console.log(formData)
     }
+
     return (
-        <form onSubmit={submitHandler} method="post">
-            {/* <input onChange={brandHandler} type="text" required placeholder="brand" /> */}
-            <select required onChange={(e) => brandHandler(e)}>
+        <form onSubmit={submitHandler} onChange={changeHandler} method="post">
+            <>
+                {/* <select required onChange={(e) => brandHandler(e)}>
                 <option value={0}>Select brand</option>
 
                 {
@@ -95,14 +70,19 @@ export const AddPhone = () => {
                         )
                     })
                 }
-            </select>
-            <input onChange={modelHandler} type="text" required placeholder="model" />
+            </select> */}
+                {/* <input onChange={modelHandler} type="text" required placeholder="model" />
             <input onChange={imgHandler} type="text" required placeholder="img" />
             <input onChange={colorHandler} type="text" required placeholder="color" />
             <input onChange={ramHandler} type="number" required placeholder="ram" />
             <input onChange={priceHandler} type="number" required placeholder="price" />
-            <input onChange={memoryHandler} type="number" required placeholder="memory" />
-            <button type="submit">Add Phone</button>
+            <input onChange={memoryHandler} type="number" required placeholder="memory" /> */}
+            </>
+            <input type='text' id='name' placeholder="Name" required />
+            <input type='number' id='stock' placeholder="Stock" required />
+            <input type='number' id='price' placeholder="Price" required />
+            <input type="file" accept=".png,.jpeg,.webp,.jps" id="image" required />
+            <button type="submit">Add Product</button>
         </form>
     )
 }

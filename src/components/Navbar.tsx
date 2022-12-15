@@ -4,7 +4,7 @@ import { UserContext } from "../hooks";
 import 'font-awesome/css/font-awesome.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBag, faBars, faArrowCircleUp, faTrash } from '@fortawesome/fontawesome-free-solid'
-import { faFacebook,faInstagram } from "@fortawesome/free-brands-svg-icons"
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons"
 import {
     BrowserRouter as Router,
     Routes,
@@ -13,9 +13,6 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import { BasketContext } from "../hooks";
-
-
-
 export const Navbar = (props) => {
     const mobileNavHandler = () => {
         document.querySelector('.mobile-nav')?.classList.add('activemobile')
@@ -41,24 +38,6 @@ export const Navbar = (props) => {
             })
     }
 
-
-
-
-
-    //  const [basket,setBasket] = React.useState([
-    //     {
-    //         itemId:'sa',
-    //         count:1,
-    //         img :'test',
-    //         name :'test',
-    //         price :5
-    //     }
-    //  ])
-    //  if(localStorage.getItem('user'))
-    //  {
-    //     const name = localStorage.getItem('user')
-    //     setUsername(name ? name  : '' )
-    //  }
 
     useEffect(() => {
         if (localStorage.getItem('user')) {
@@ -132,132 +111,158 @@ export const Navbar = (props) => {
     const usercontext = useContext(UserContext)
     // console.log(basket.basket)
 
+    const style = {
+        color: "#EBA937",
+        fontWeight: 600,
+    }
+    const divstyle = {
+        display: "flex",
+        justifyContent: "center",
+        backgroundColor: "black",
+        position:'fixed',
+        alignItems: "center",
+       height: '0px',
+       overflow : 'hidden',
+       transition : '0.3s',
+        zIndex : 100000,
+       width : '100%'
+    }
     return (
+
         <>
-            <nav>
-                <div className="container">
-                    <div className="row">
-                        <div style={{ display: 'flex', alignItems: 'center' }} className="logo col-lg-2 col-5 col-md-5">
-                            <Link to='/'>
-                                <img src="logosafbal.png" style={{ width: '100%', height: '60px', objectFit: 'cover' }} alt="unknown" />
+            <header style={{position:'relative'}}>
 
-                            </Link>
-                        </div>
-                        <div className="services col-lg-6 ">
-                            <ul>
-                                <li>
-                                    <Link to="/">ƏSAS SƏHİFƏ</Link>
-                                </li>
-                                <li><a href="#">MƏHSULLAR</a></li>
-                                <li><a href="#">HAQQIMIZDA</a></li>
-                                <li><a href="#">ƏLAQƏ</a></li>
-                                {/* <li><a href="#">TRAINERS</a></li> */}
-                            </ul>
-                        </div>
-                        <div className="col-lg-2 navbarphonediv">
-                            <a className="navbarphone" href="tel:0503686882">050 368 68 82</a>
-                        </div>
-                        <div className="shoparea col-lg-2 ">
-                            <div className="bag">
-                                <FontAwesomeIcon icon={faShoppingBag} color={"#fff"} />
-                                <p style={{ backgroundColor: "#EBA937" }} className="totalcount">{basketcont.basket.length}</p>
+                <div style={divstyle}  className="stickyNav">
+                    <span style={style} >Taste Best Quality!</span>
+                </div>
+                <nav>
+
+                    <div className="container">
+                        <div className="row">
+                            <div style={{ display: 'flex', alignItems: 'center' }} className="logo col-lg-2 col-5 col-md-5">
+                                <Link to='/'>
+                                    <img src="logosafbal.png" style={{ width: '100%', height: '60px', objectFit: 'cover' }} alt="unknown" />
+
+                                </Link>
                             </div>
-                            <div className="cart-total">
+                            <div className="services col-lg-6 ">
+                                <ul>
+                                    <li>
+                                        <Link to="/">ƏSAS SƏHİFƏ</Link>
+                                    </li>
+                                    <li><a href="#">MƏHSULLAR</a></li>
+                                    <li><a href="#">HAQQIMIZDA</a></li>
+                                    <li><a href="#">ƏLAQƏ</a></li>
+                                    {/* <li><a href="#">TRAINERS</a></li> */}
+                                </ul>
+                            </div>
+                            <div className="col-lg-2 navbarphonediv">
+                                <a className="navbarphone" href="tel:0503686882">050 368 68 82</a>
+                            </div>
+                            <div className="shoparea col-lg-2 ">
+                                <div className="bag">
+                                    <FontAwesomeIcon icon={faShoppingBag} color={"#fff"} />
+                                    <p style={{ backgroundColor: "#EBA937" }} className="totalcount">{basketcont.basket.length}</p>
+                                </div>
+                                <div className="cart-total">
 
-                                <p>
-                                    {/* {   
+                                    <p>
+                                        {/* {   
                                     basketcont.basket.
                                 } */}
 
-                                    ({total} azn)
-                                    {usercontext.user}
-                                </p>
-                            </div>
-                            <div className="basket" style={{ width: '300px' }}>
-                                <div className="items">
-
-                                    {
-
-                                        basketcont.basket.map((item) => {
-                                            return (
-
-
-
-                                                <div key={item.itemId} className="item">
-                                                    <div className="item-image">
-                                                        <img src={item.img} alt="yoxdu" />
-                                                    </div>
-                                                    <div className="info">
-                                                        <div >
-                                                            <a style={{ paddingLeft: '10px' }} href="#" className="item-name">{item.name}</a>
-                                                        </div>
-                                                        <div style={{ paddingLeft: '10px' }} className="price-count">
-                                                            <span className="item-count">{item.count} x </span>
-                                                            <span className="item-price">{item.price}$</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="delete-div">
-                                                        <FontAwesomeIcon onClick={() => deleteBasketItemHandler(item.itemId)} icon={faTrash} color={"#fff"} />
-
-                                                    </div>
-                                                </div>
-
-                                            )
-                                        })
-
-                                    }
-
-
-
+                                        ({total} azn)
+                                        {usercontext.user}
+                                    </p>
                                 </div>
-                                <div className="checkout-area">
-                                    <a href="#" onClick={orderHandler} className={basketcont.basket.length > 0 ? 'makeorder' : 'disabledorderbtn'}>Sifariş et</a>
+                                <div className="basket" style={{ width: '300px' }}>
+                                    <div className="items">
+
+                                        {
+
+                                            basketcont.basket.map((item) => {
+                                                return (
+
+
+
+                                                    <div key={item.itemId} className="item">
+                                                        <div className="item-image">
+                                                            <img src={`http://localhost:3000/${item.image}`} alt="yoxdu" />
+                                                        </div>
+                                                        <div className="info">
+                                                            <div >
+                                                                <a style={{ paddingLeft: '10px' }} href="#" className="item-name">{item.name}</a>
+                                                            </div>
+                                                            <div style={{ paddingLeft: '10px' }} className="price-count">
+                                                                <span className="item-count">{item.count} x </span>
+                                                                <span className="item-price">{item.price}$</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="delete-div">
+                                                            <FontAwesomeIcon onClick={() => deleteBasketItemHandler(item.itemId)} icon={faTrash} color={"#fff"} />
+
+                                                        </div>
+                                                    </div>
+
+                                                )
+                                            })
+
+                                        }
+
+
+
+                                    </div>
+                                    <div className="checkout-area">
+                                        <a href="#" onClick={orderHandler} className={basketcont.basket.length > 0 ? 'makeorder' : 'disabledorderbtn'}>Sifariş et</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="burger-button col-7 col-md-7">
-                            <FontAwesomeIcon onClick={mobileNavHandler} icon={faBars} color={"#fff"} />
+                            <div className="burger-button col-7 col-md-7">
+                                <FontAwesomeIcon onClick={mobileNavHandler} icon={faBars} color={"#fff"} />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="mobile-nav">
+                    <div className="mobile-nav">
 
-                    <ul>
-                        <li>
-                            <Link onClick={mobileCloser} to="/">ƏSAS SƏHİFƏ</Link>
+                        <ul>
+                            <li>
+                                <Link onClick={mobileCloser} to="/">ƏSAS SƏHİFƏ</Link>
 
-                        </li>
-                        <li><Link onClick={mobileCloser} to="/">MƏHSULLAR</Link></li>
-                        <li><Link onClick={mobileCloser} to="/">HAQQIMIZDA</Link></li>
-                        <li><Link onClick={mobileCloser} to="/">ƏLAQƏ</Link></li>
-                        <li className="navregister"><Link onClick={mobileCloser} to="/register">QEYDİYYAT</Link></li>
-                        <li className="navlogin"><Link onClick={mobileCloser} to="/login">DAXİL OL</Link></li>
-                        <li className="navlogout" onClick={(e) => logout(e)}><Link onClick={mobileCloser} to="/login">HESABDAN ÇIXIŞ ET</Link></li>
+                            </li>
+                            <li><Link onClick={mobileCloser} to="/">MƏHSULLAR</Link></li>
+                            <li><Link onClick={mobileCloser} to="/">HAQQIMIZDA</Link></li>
+                            <li><Link onClick={mobileCloser} to="/">ƏLAQƏ</Link></li>
+                            <li className="navregister"><Link onClick={mobileCloser} to="/register">QEYDİYYAT</Link></li>
+                            <li className="navlogin"><Link onClick={mobileCloser} to="/login">DAXİL OL</Link></li>
+                            <li className="navlogout" onClick={(e) => logout(e)}><Link onClick={mobileCloser} to="/login">HESABDAN ÇIXIŞ ET</Link></li>
 
-                        <li >
-                            <div className="col-lg-2 navbarphonediv">
-                                <a style={{ color: 'black !important' }} className="navbarphone" href="tel:0503686882">050 368 68 82</a>
-                            </div>
-                        </li>
-                        <li style={{margin:'0',width:'100px',display:'flex',justifyContent:'space-between'}} className="socialsMobNav">
-                              <a style={{color:"#4267B2"}} href='https://www.facebook.com/saflbal' target="_blank">
-                              <FontAwesomeIcon icon={faFacebook} />
-                              </a>  
-                              <a style={{color:"#E1306C"}} href='https://www.instagram.com/saf_bal_/?hl=en' target="_blank">
-                              <FontAwesomeIcon icon={faInstagram} />
+                            <li >
+                                <div className="col-lg-2 navbarphonediv">
+                                    <a style={{ color: 'black !important' }} className="navbarphone" href="tel:0503686882">050 368 68 82</a>
+                                </div>
+                            </li>
+                            <li style={{ margin: '0', width: '100px', display: 'flex', justifyContent: 'space-between' }} className="socialsMobNav">
+                                <a style={{ color: "#4267B2" }} href='https://www.facebook.com/saflbal' target="_blank">
+                                    <FontAwesomeIcon icon={faFacebook} />
+                                </a>
+                                <a style={{ color: "#E1306C" }} href='https://www.instagram.com/saf_bal_/?hl=en' target="_blank">
+                                    <FontAwesomeIcon icon={faInstagram} />
 
-                              </a>
+                                </a>
 
-                        </li>
+                            </li>
 
-                        {/* <li><a href="#">TRAINERS</a></li>
+                            {/* <li><a href="#">TRAINERS</a></li>
                         <li><a href="#">CART</a></li> */}
 
-                    </ul>
-                    <FontAwesomeIcon onClick={mobileCloser} icon={faArrowCircleUp} color={"#fff"} />
+                        </ul>
+                        <FontAwesomeIcon onClick={mobileCloser} icon={faArrowCircleUp} color={"#fff"} />
 
-                </div>
-            </nav>
+                    </div>
+                </nav>
+
+            </header>
+
 
 
 

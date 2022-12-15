@@ -13,6 +13,16 @@
 .foreffect{
   display: none;
 }
+.active > .page-link, .page-link.active {
+    background-color: #EBA937 !important;
+    border: 1px black solid !important;
+}
+.stickyNav{
+  position: relative;
+}
+.stickyheight{
+  height: 40px !important;
+}
 .location {
   padding: 60px 0;
   position: relative;

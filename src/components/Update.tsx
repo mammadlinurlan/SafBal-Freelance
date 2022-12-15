@@ -14,6 +14,12 @@ export const Update = (props) => {
     const [price, setPrice] = React.useState('')
     const [memory, setMemory] = React.useState('')
     const [brands, setBrands] = React.useState([])
+    const [product, setProduct] = React.useState({
+        name: '',
+        stock: '',
+        price: '',
+        image: '',
+    })
 
     // setTimeout(() => {
     //     const phone = {
@@ -30,48 +36,77 @@ export const Update = (props) => {
     //     // console.log(phone)
     // }, 1200);
 
+    // useEffect(() => {
+    //     axios.get('http://localhost:3000/brands')
+    //         .then((result) => {
+    //             // console.log(result.data)
+    //             setBrands(result.data)
+    //             console.log(brands)
+    //         })
+
+    //     axios.get(`http://localhost:3000/phone/${phoneId}`)
+    //         .then((res) => {
+    //             setBrand(res.data.brand)
+    //             setModel(res.data.model)
+    //             setImg(res.data.img)
+    //             setColor(res.data.color)
+    //             setRam(res.data.ram)
+    //             setPrice(res.data.price)
+    //             setMemory(res.data.memory)
+
+    //         })
+
+    // }, [])
+    // const brandHandler = (e) => {
+    //     setBrand(e.target.value)
+    // }
+    // const modelHandler = (e) => {
+    //     setModel(e.target.value)
+    // }
+    // const imgHandler = (e) => {
+    //     setImg(e.target.value)
+    // }
+    // const colorHandler = (e) => {
+    //     setColor(e.target.value)
+    // }
+    // const ramHandler = (e) => {
+    //     setRam(e.target.value)
+    // }
+    // const priceHandler = (e) => {
+    //     setPrice(e.target.value)
+    // }
+    // const memoryHandler = (e) => {
+    //     setMemory(e.target.value)
+    // }
+
     useEffect(() => {
-        axios.get('http://localhost:3000/brands')
-            .then((result) => {
-                // console.log(result.data)
-                setBrands(result.data)
-                console.log(brands)
+        axios.get(`http://localhost:3000/getproduct/${phoneId}`)
+            .then(({ data }) => {
+                setProduct(data)
             })
-
-        axios.get(`http://localhost:3000/phone/${phoneId}`)
-            .then((res) => {
-                setBrand(res.data.brand)
-                setModel(res.data.model)
-                setImg(res.data.img)
-                setColor(res.data.color)
-                setRam(res.data.ram)
-                setPrice(res.data.price)
-                setMemory(res.data.memory)
-
-            })
-
     }, [])
-    const brandHandler = (e) => {
-        setBrand(e.target.value)
+
+    const [data, setData] = React.useState({
+        name: '',
+        stock: '',
+        price: '',
+        image: ''
+    })
+
+    const changeHandler = (e) => {
+        const name = e.target.id
+        let value = name == 'image' ? e.target.files[0] : e.target.value
+        if (name == 'stock' || name == 'price') {
+            value = Number(value)
+        }
+        setData((prevstate) => {
+            return {
+                ...prevstate,
+                [name]: value
+            }
+        })
     }
-    const modelHandler = (e) => {
-        setModel(e.target.value)
-    }
-    const imgHandler = (e) => {
-        setImg(e.target.value)
-    }
-    const colorHandler = (e) => {
-        setColor(e.target.value)
-    }
-    const ramHandler = (e) => {
-        setRam(e.target.value)
-    }
-    const priceHandler = (e) => {
-        setPrice(e.target.value)
-    }
-    const memoryHandler = (e) => {
-        setMemory(e.target.value)
-    }
+
     const submitHandler = (e) => {
         e.preventDefault()
         const phone = {
@@ -89,8 +124,8 @@ export const Update = (props) => {
         }
         else {
 
-            axios.put(`http://localhost:3000/update/${phoneId}`, phone).then(({status})=>{
-                if(status==200){
+            axios.put(`http://localhost:3000/update/${phoneId}`, phone).then(({ status }) => {
+                if (status == 200) {
                     console.log("ag");
                     Swal.fire({
                         position: 'center',
@@ -103,10 +138,10 @@ export const Update = (props) => {
                         window.location.href = `http://${window.location.host}`
                     }, 1500);
                 }
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log(err)
             })
-            
+
 
             console.log('salam')
         }
@@ -115,31 +150,24 @@ export const Update = (props) => {
         console.log(phone)
     }
     return (
-        <>
-            <h3>Update</h3>
-            <span>id : {phoneId}</span>
-
-
-            <form onSubmit={submitHandler} >
-                <select required onChange={(e) => brandHandler(e)}>
-                    <option value={0}>Select brand</option>
-                    {
-                        brands.map((brand) => {
-                            return (
-                                <option selected={brand._id == brandd ? true : false} key={brand._id} value={brand._id}>{brand.name}</option>
-                            )
-                        })
-                    }
-                </select>
-                <input onChange={modelHandler} defaultValue={model} type="text" required placeholder="model" />
-                <input onChange={imgHandler} defaultValue={img} type="text" required placeholder="img" />
-                <input onChange={colorHandler} type="text" defaultValue={color} required placeholder="color" />
-                <input onChange={ramHandler} type="number" defaultValue={ram} required placeholder="ram" />
-                <input onChange={priceHandler} type="number" defaultValue={price} required placeholder="price" />
-                <input onChange={memoryHandler} type="number" defaultValue={memory} required placeholder="memory" />
-                <button type="submit">Add Phone</button>
+        
+        <div className="container">
+        <h3>Update</h3>
+            <form onSubmit={submitHandler} onChange={changeHandler} method="post">
+                <span>id : {phoneId}</span>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <h3>Current image :</h3>
+                    <img width="100" src={`http://localhost:3000/${product.image}`} />
+                </div>
+                <input defaultValue={product.name} type='text' id='name' placeholder="Name" required />
+                <input defaultValue={product.stock} type='number' id='stock' placeholder="Stock" required />
+                <input defaultValue={product.price} type='number' id='price' placeholder="Price" required />
+                <input type="file" accept=".png,.jpeg,.webp,.jpg" id="image" required />
+                <button type="submit">Update Product</button>
             </form>
-        </>
+        </div>
+          
+       
 
     )
 }
